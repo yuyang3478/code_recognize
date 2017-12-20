@@ -358,8 +358,8 @@ class Camera(QMainWindow):
         ######################
         centerx = int(cvImg.shape[1] / 2)
         centery = int(cvImg.shape[0] / 2)
-        half_width = 800
-        half_height = 400
+        half_width = 200
+        half_height = 100
         y = centery - half_height
         x = centerx - half_width
         print(type(cvImg))
@@ -372,13 +372,15 @@ class Camera(QMainWindow):
         #               (centerx + half_width, centery + half_height),
         #               (0, 0, 255),
         #               2)
-        # cv2.imshow("",cvImgCroped)
-        # cv2.waitKey(0)
+
         ######################
+
+        # Convert to RGB for QImage.
+        cvImgCContinues = cv2.cvtColor(cvImgCContinues, cv2.COLOR_BGR2RGB)
+        # cv2.imshow("",cvImgCContinues)
+        # cv2.waitKey(0)
         height, width, bytesPerComponent = cvImgCContinues.shape
         bytesPerLine = bytesPerComponent * width;
-        # Convert to RGB for QImage.
-        cv2.cvtColor(cvImgCContinues, cv2.COLOR_BGR2RGB, cvImgCContinues)
         self.image = QImage(cvImgCContinues.data, width, height, bytesPerLine, QImage.Format_RGB888)
         return self.image
 
